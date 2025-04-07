@@ -8,10 +8,14 @@ st.title("📈 Brand Funnel from Excel")
 st.markdown("Upload your Excel file to explore brand funnel stages over time.")
 
 # Upload Excel file
-uploaded_file = st.file_uploader("📁 Upload Excel (.xlsx)", type=["xlsx"])
+uploaded_file = st.file_uploader("📁 Upload Excel (.xls or .xlsx)", type=["xls", "xlsx"])
 
 if uploaded_file:
-    df_raw = pd.read_excel(uploaded_file)
+    try:
+        df_raw = pd.read_excel(uploaded_file, engine='xlrd')  # .xls
+    except:
+        df_raw = pd.read_excel(uploaded_file)  # fallback to openpyxl for .xlsx
+
     df = df_raw.melt(id_vars=['Brand', 'Metric'], var_name='Quarter', value_name='Value')
     df['Value'] = df['Value'].astype(str).str.replace('%', '', regex=False)
     df['Value'] = pd.to_numeric(df['Value'], errors='coerce')

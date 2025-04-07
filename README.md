@@ -1,6 +1,6 @@
 # Brand Funnel Visualizer
 
-This Streamlit app lets you upload an Excel file with brand funnel metrics by quarter and visualize the funnel as a chart.
+This Streamlit app lets you upload an Excel file (.xls or .xlsx) with brand funnel metrics by quarter and visualize the funnel as a chart.
 
 ## 📁 Required Excel Format
 
